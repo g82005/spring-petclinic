@@ -3,20 +3,19 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'mvn spring-javaformat:apply'
-        sh './mvnw package'
+        sh 'mvn clean'
       }
     }
 
     stage('Test') {
       steps {
-        sh 'mvn clean test'
+        sh 'mvn test'
       }
     }
 
     stage('Package') {
       steps {
-        echo 'Package'
+        sh 'mvn package'
       }
     }
 
