@@ -5,18 +5,21 @@ pipeline {
       steps {
         // sh 'mvn spring-javaformat:apply'
         // sh 'mvn clean'
+		echo 'Build'
       }
     }
 
     stage('Test') {
       steps {
         // sh 'mvn test'
+		echo 'Test'
       }
     }
 
     stage('Package') {
       steps {
         // sh 'mvn package'
+		echo 'Package'
       }
     }
 
