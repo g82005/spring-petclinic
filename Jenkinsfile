@@ -3,23 +3,20 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        // sh 'mvn spring-javaformat:apply'
-        // sh 'mvn clean'
-		echo 'Build'
+        sh 'mvn spring-javaformat:apply'
+        sh 'mvn clean'
       }
     }
 
     stage('Test') {
       steps {
-        // sh 'mvn test'
-		echo 'Test'
+        sh 'mvn test'
       }
     }
 
     stage('Package') {
       steps {
-        // sh 'mvn package'
-		echo 'Package'
+        sh 'mvn package'
       }
     }
 
@@ -37,8 +34,8 @@ pipeline {
     always{
 		emailext (
           subject: "INFO: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-          body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+          body: """INFO: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':
+		  Check console output at ${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]""",
           recipientProviders: [[$class: 'DevelopersRecipientProvider']]
         )
 	}
