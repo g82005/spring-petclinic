@@ -14,25 +14,30 @@ pipeline {
 					).split('\n')			
 					echo 'Commits are: $commits'
 					}
+				else{
+					echo 'No lastSuccessfulCommit'
 				}
+			}
 		  }
 	}
     stage('Build') {
       steps {
-        sh 'mvn spring-javaformat:apply'
-        sh 'mvn clean'
+	    echo 'Building'
+        // sh 'mvn spring-javaformat:apply'
+        // sh 'mvn clean'
       }
     }
 
     stage('Test') {
       steps {
-        sh 'mvn test'
+        // sh 'mvn test'
       }
     }
 
     stage('Package') {
       steps {
-        sh 'mvn package'
+	    echo 'Packaging'
+        // sh 'mvn package'
       }
     }
 
