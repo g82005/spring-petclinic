@@ -5,15 +5,15 @@ pipeline {
   agent any
   stages {
 	stage('Phase 1') {
-	  if (lastSuccessfulCommit) {
-		commits = sh(
-		  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
-		  returnStdout: true
-		).split('\n')
 		steps {
-			echo 'Commits are: $commits'
-		}
-	  }
+			  if (lastSuccessfulCommit) {
+				commits = sh(
+				  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
+				  returnStdout: true
+				).split('\n')			
+				echo 'Commits are: $commits'
+				}
+		  }
 	}
     stage('Build') {
       steps {
