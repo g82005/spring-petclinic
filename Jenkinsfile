@@ -1,6 +1,19 @@
 pipeline {
   agent any
   stages {
+	stage( "Phase 1" ) {
+
+	  def lastSuccessfulCommit = %GIT_PREVIOUS_SUCCESSFUL_COMMIT%
+	  def currentCommit = %GIT_COMMIT%
+	  if (lastSuccessfulCommit) {
+		commits = sh(
+		  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
+		  returnStdout: true
+		).split('\n')
+		println "Commits are: $commits"
+	  }
+		
+	}
     stage('Build') {
       steps {
         sh 'mvn spring-javaformat:apply'
