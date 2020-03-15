@@ -10,7 +10,9 @@ pipeline {
 		  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
 		  returnStdout: true
 		).split('\n')
-		println "Commits are: $commits"
+		steps {
+			println "Commits are: $commits"
+		}
 	  }
 	}
     stage('Build') {
