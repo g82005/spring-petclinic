@@ -7,6 +7,8 @@ pipeline {
 	stage('Phase 1') {
 		steps {
 			script {
+			      echo $env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
+				  echo $env.GIT_COMMIT
 				  if (lastSuccessfulCommit) {
 					commits = sh(
 					  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
