@@ -4,14 +4,14 @@ def currentCommit = GIT_COMMIT
 pipeline {
   agent any
   stages {
-	stage( "Phase 1" ) {
+	stage('Phase 1') {
 	  if (lastSuccessfulCommit) {
 		commits = sh(
 		  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
 		  returnStdout: true
 		).split('\n')
 		steps {
-			println "Commits are: $commits"
+			echo 'Commits are: $commits'
 		}
 	  }
 	}
