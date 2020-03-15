@@ -6,12 +6,14 @@ pipeline {
   stages {
 	stage('Phase 1') {
 		steps {
-			  if (lastSuccessfulCommit) {
-				commits = sh(
-				  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
-				  returnStdout: true
-				).split('\n')			
-				echo 'Commits are: $commits'
+			script {
+				  if (lastSuccessfulCommit) {
+					commits = sh(
+					  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
+					  returnStdout: true
+					).split('\n')			
+					echo 'Commits are: $commits'
+					}
 				}
 		  }
 	}
