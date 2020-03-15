@@ -1,5 +1,5 @@
-def lastSuccessfulCommit = %GIT_PREVIOUS_SUCCESSFUL_COMMIT%
-def currentCommit = %GIT_COMMIT%
+def lastSuccessfulCommit = GIT_PREVIOUS_SUCCESSFUL_COMMIT
+def currentCommit = GIT_COMMIT
 
 pipeline {
   agent any
