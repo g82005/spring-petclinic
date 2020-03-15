@@ -5,8 +5,6 @@ pipeline {
   agent any
   stages {
 	stage( "Phase 1" ) {
-
-
 	  if (lastSuccessfulCommit) {
 		commits = sh(
 		  script: "git rev-list $currentCommit \"^$lastSuccessfulCommit\"",
@@ -14,7 +12,6 @@ pipeline {
 		).split('\n')
 		println "Commits are: $commits"
 	  }
-		
 	}
     stage('Build') {
       steps {
