@@ -1,4 +1,5 @@
 #!/bin/bash
+def previousSucess = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
 def currentCommit = env.GIT_COMMIT
 def count
 pipeline {
@@ -7,10 +8,7 @@ pipeline {
 		stage('Phase 1') {
 			steps {
 				script{
-					node{
-						count = readFile 'Count.txt'
-					}
-					
+					count =`cat Count.txt`
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
 					if(${previousSucess}.trim()){
