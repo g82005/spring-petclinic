@@ -8,7 +8,7 @@ pipeline {
 			steps {
 				script{
 					node{
-						count = readFile '${WORKSPACE}/Count.txt'
+						count = readFile 'Count.txt'
 					}
 					
 					echo "${count.trim()}"
