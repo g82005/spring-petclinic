@@ -15,18 +15,7 @@ pipeline {
 					if( previousSucess ){
 						echo 'No previous sucess build, going to build.'
 					}
-					else{
-						if( ${count.trim()}.toInteger()>=8 ){
-							echo 'Having 8 commits, going to build.'
-							sh 'echo "0" > Count.txt'
-						}
-						else{
-							newCount = ${count.trim()}.toInteger() + 1
-							sh 'echo ${newCount} > Count.txt'
-							echo 'increment count to ${count.trim().toInteger(). Exiting.}'
-							exit 0
-						}
-					}
+					
 			}
 		  }
 	}
