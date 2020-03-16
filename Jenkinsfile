@@ -1,5 +1,3 @@
-#!/bin/cat
-
 def previousSucess = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
 def currentCommit = env.GIT_COMMIT
 def count
@@ -9,7 +7,7 @@ pipeline {
 		stage('Phase 1') {
 			steps {
 				script{
-					sh '${count} = cat "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt"'
+					${count} = cat "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt"
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
 					if(${previousSucess}.trim()){
