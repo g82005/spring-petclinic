@@ -85,10 +85,10 @@ pipeline {
 			}
 			script {
 				def unstable = env.GIT_COMMIT
-				sh 'git bisect bad $unstable'
+				sh ("git bisect bad $unstable")
 			}
 			script {
-				sh 'git bisect good $previousSucess'
+				sh ("git bisect good $previousSucess")
 			}
 			script {
 				sh 'git bisect run mvn clean test'
