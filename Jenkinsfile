@@ -12,6 +12,8 @@ pipeline {
 				  echo "${count}"
 				  echo "${previousSucess}"
 				  echo "$env.GIT_COMMIT"
+				  cc = $env.GIT_COMMIT"
+				  echo "${cc}"
 					if( previousSucess == "" ){
 						echo 'No previous sucess build, going to build.'
 					}
