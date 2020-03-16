@@ -24,7 +24,7 @@ pipeline {
 						else{
 							newCount = count + 1
 							echo "${newCount}"
-							writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt", text: newCount)
+							writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt", text: newCount.toString())
 							echo 'increment count to "${count}" Exiting.'
 							exit 0
 						}
