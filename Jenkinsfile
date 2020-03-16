@@ -7,6 +7,7 @@ pipeline {
   stages {
 		stage('Phase 1') {
 			steps {
+				script{
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
 					if(${previousSucess}.trim()){
@@ -24,7 +25,9 @@ pipeline {
 						}
 					}
 				}
+					
 			}
+		}
 		
 		stage('Build') {
 		  steps {
@@ -38,10 +41,6 @@ pipeline {
 		  steps {
 					echo 'Testing..'
 					// sh 'mvn test'
-					
-					if(${currentBuild.result}.equals("FAILURE")){
-						
-					}
 				}
 		}
 		stage('Package') {
@@ -50,18 +49,17 @@ pipeline {
 			// sh 'mvn package'
 		  }
 		}
-
-		
-		
 	}
 	post {
     	failure {
 			echo 'Testing failed!'
-			if(${previousSucess}.trim()!=NULL){				
+			script{
+				if(${previousSucess}.trim()!=NULL){				
 				sh "git bisect start $env.GIT_COMMIT ${previousSucess}.trim()"
 				sh "git bisect run mvn clean test"
 				sh "git bisect reset"
-			}			
+				}
+			}	
     	}
    }
 
