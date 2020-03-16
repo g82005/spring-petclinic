@@ -7,7 +7,7 @@ pipeline {
 		stage('Phase 1') {
 			steps {
 				script{
-					${count} = cat ${"D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt"}
+					cat "${"D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt"}"
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
 					if(${previousSucess}.trim()){
@@ -16,11 +16,11 @@ pipeline {
 					else{
 						if(${count.trim()}.toInteger()>=8){
 							echo 'Having 8 commits, going to build.'
-							sh 'echo "0" > Count.txt'
+							echo '"0" > Count.txt'
 						}
 						else{
 							newCount = ${count.trim()}.toInteger() + 1
-							sh 'echo ${newCount} > Count.txt'
+							echo '${newCount} > Count.txt'
 							echo 'increment count to ${count.trim().toInteger(). Exiting.}'
 							exit 0
 						}
