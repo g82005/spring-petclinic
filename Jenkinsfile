@@ -11,7 +11,7 @@ pipeline {
 				  ${count} = cat "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt"
 				  echo "$env.GIT_PREVIOUS_SUCCESSFUL_COMMIT"
 				  echo "$env.GIT_COMMIT"
-					if ${previousSucess}.trim(){
+					if ${previousSucess.trim()}{
 						echo 'No previous sucess build, going to build.'
 					}
 					else{
