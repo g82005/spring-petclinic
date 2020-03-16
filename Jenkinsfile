@@ -1,4 +1,4 @@
-def previousSucess = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT.trim()
+def previousSucess = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
 def currentCommit = env.GIT_COMMIT
 def count
 
