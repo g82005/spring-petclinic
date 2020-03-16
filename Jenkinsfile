@@ -1,5 +1,5 @@
-def lastSuccessfulCommit = $env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
-def currentCommit = $env.GIT_COMMIT
+def lastSuccessfulCommit = $GIT_PREVIOUS_SUCCESSFUL_COMMIT
+def currentCommit = $GIT_COMMIT
 def previousSucess = readFile 'PreviousSucess.txt'
 def count = readFile 'Count.txt'
 pipeline {
@@ -16,6 +16,7 @@ pipeline {
 					else{
 						if(${count.trim()}.toInteger()>=8){
 							echo 'Having 8 commits, going to build.'
+							sh 'echo "0" > Count.txt'
 						}
 						else{
 							newCount = ${count.trim()}.toInteger() + 1
@@ -55,7 +56,7 @@ pipeline {
 			echo 'Testing failed!'
 			script{
 				if(${previousSucess}.trim()!=NULL){				
-				sh "git bisect start $env.GIT_COMMIT ${previousSucess}.trim()"
+				sh "git bisect start $GIT_COMMIT ${previousSucess}.trim()"
 				sh "git bisect run mvn clean test"
 				sh "git bisect reset"
 				}
