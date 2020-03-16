@@ -78,11 +78,5 @@ pipeline {
 			}
 		}
 	}
-	
-	post {
-		success {
-            echo 'Testing succeeeded!'
-        }
-    	
-	}
+
 }
