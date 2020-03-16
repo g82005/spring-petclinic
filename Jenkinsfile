@@ -8,7 +8,7 @@ pipeline {
 		stage('Phase 1') {
 			steps {
 				script{
-					sh '${count} = cat $(Count.txt)'
+					sh '${count} = $(cat Count.txt)'
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
 					if(${previousSucess}.trim()){
