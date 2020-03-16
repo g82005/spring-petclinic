@@ -1,6 +1,7 @@
 def previousSucess
 def count
 def skipping = false
+def testPass = false
 pipeline {
 	agent any
 	stages {
@@ -37,8 +38,8 @@ pipeline {
 				script {
 					if (!skipping){
 						echo 'Building'
-					// sh 'mvn spring-javaformat:apply'
-					// sh 'mvn clean'
+						sh 'mvn spring-javaformat:apply'
+						sh 'mvn clean'
 					}
 				}
 			}
@@ -49,20 +50,8 @@ pipeline {
 				script {
 					if (!skipping){
 						echo 'Testing..'
-						// sh 'mvn test' 
+						sh 'mvn test' 
 						writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt", text:  env.GIT_COMMIT)
-						currentBuild.result = 'SUCCESS'
-						echo "$currentBuild.result"
-						if (currentBuild.result != 'SUCCESS') {
-							echo 'Testing failed!'
-							script{
-								if ( previousSucess != NULL) {				
-									sh "git bisect start $GIT_COMMIT ${previousSucess}"
-									sh "git bisect run mvn clean test"
-									sh "git bisect reset"
-								}
-							}
-						}
 					}
 				}
 			}
@@ -73,7 +62,7 @@ pipeline {
 				script {
 					if (!skipping){
 						echo 'Packaging'
-						// sh 'mvn package'
+						sh 'mvn package'
 					}
 				}  
 			}
@@ -81,14 +70,27 @@ pipeline {
 
 		stage('Deploy') {
 			steps {
-				script{
-					if (!skipping){
-						when {
-							branch 'master'
-						  }
-						  steps {
+				when {
+						branch 'master'
+					}
+				steps {
+					script{
+						if (!skipping){
 							echo 'Deploying'
 						}
+					}
+				}
+			}
+		}
+	}
+	post {
+    	failure {
+			echo 'Testing failed!'
+				script{
+					if ( previousSucess != "") {
+						sh "git bisect start $GIT_COMMIT ${previousSucess}"
+						sh "git bisect run mvn clean test"
+						sh "git bisect reset"
 					}
 				}
 			}
