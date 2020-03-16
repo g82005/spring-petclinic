@@ -72,7 +72,7 @@ pipeline {
 			steps {
 				script{
 					if (!skipping){
-						echo 'Deploying'
+						echo 'Deploying.'
 					}
 				}
 			}
