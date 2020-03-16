@@ -1,6 +1,5 @@
 def previousSucess = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
 def currentCommit = env.GIT_COMMIT
-
 def count
 pipeline {
   agent any
@@ -17,11 +16,11 @@ pipeline {
 					else{
 						if(${count.trim()}.toInteger()>=8){
 							echo 'Having 8 commits, going to build.'
-							echo '"0" > Count.txt'
+							sh 'echo "0" > Count.txt'
 						}
 						else{
 							newCount = ${count.trim()}.toInteger() + 1
-							echo '${newCount} > Count.txt'
+							sh 'echo ${newCount} > Count.txt'
 							echo 'increment count to ${count.trim().toInteger(). Exiting.}'
 							exit 0
 						}
