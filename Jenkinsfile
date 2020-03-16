@@ -82,8 +82,8 @@ pipeline {
     	failure {
 			script {
 				sh 'git bisect start'
-				def stable = readFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt").trim()
-				sh 'git bisect good $stable'
+				echo "$previousSucess"
+				sh 'git bisect good $previousSucess'
 				def unstable = env.GIT_COMMIT
 				sh 'git bisect bad $unstable'
 				sh 'git bisect run mvn clean test'
