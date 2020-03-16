@@ -63,7 +63,7 @@ pipeline {
 					if (!skipping){
 						echo 'Packaging'
 						sh 'mvn package'
-					}
+					}a
 				}  
 			}
 		}
@@ -78,5 +78,13 @@ pipeline {
 			}
 		}
 	}
-
+	post {
+    	failure {
+        	sh 'git bisect start'
+			sh 'git bisect good "${previousSucess}"'
+			sh 'git bisect bad "$env.GIT_COMMIT"'
+			sh 'git bisect run mvn clean test'
+			sh 'git bisect reset'
+    	}
+   }
 }
