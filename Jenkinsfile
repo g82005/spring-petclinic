@@ -1,6 +1,6 @@
 def previousSucess
 def count
-
+def  cc = $env.GIT_COMMIT"
 pipeline {
   agent any
   stages {
@@ -12,7 +12,7 @@ pipeline {
 				  echo "${count}"
 				  echo "${previousSucess}"
 				  echo "$env.GIT_COMMIT"
-				  cc = $env.GIT_COMMIT"
+				 
 				  echo "${cc}"
 					if( previousSucess == "" ){
 						echo 'No previous sucess build, going to build.'
