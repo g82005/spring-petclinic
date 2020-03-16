@@ -1,6 +1,6 @@
 def previousSucess
 def count
-def  cc = $env.GIT_COMMIT
+def  cc = env.GIT_COMMIT
 pipeline {
   agent any
   stages {
