@@ -1,4 +1,6 @@
 #!/bin/sh
+#!/bin/bash
+#!/bin/cat
 def previousSucess = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
 def currentCommit = env.GIT_COMMIT
 def count
