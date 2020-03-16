@@ -87,9 +87,7 @@ pipeline {
 			echo 'Testing failed!'
 			script{
 				if ( previousSucess != "") {
-					sh 'git bisect start'
-					echo "$env.GIT_COMMIT"
-					echo "${previousSucess}"
+					echo "x"
 				}
 			}
 		}
