@@ -61,7 +61,7 @@ pipeline {
 			steps {
 				script {
 					if (!skipping){
-						echo 'Packaging'
+						echo 'Packaging '
 						sh 'mvn package'
 					}
 				}  
