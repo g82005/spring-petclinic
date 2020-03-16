@@ -9,13 +9,14 @@ pipeline {
 		steps {
 			script {
 				  count = readFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt")
+				  echo "${count.trim()}"
 				  echo "$env.GIT_PREVIOUS_SUCCESSFUL_COMMIT"
 				  echo "$env.GIT_COMMIT"
-					if (${previousSucess}.trim()){
+					if( ${previousSucess}.trim() ){
 						echo 'No previous sucess build, going to build.'
 					}
 					else{
-						if (${count.trim()}.toInteger()>=8 ){
+						if( ${count.trim()}.toInteger()>=8 ){
 							echo 'Having 8 commits, going to build.'
 							sh 'echo "0" > Count.txt'
 						}
