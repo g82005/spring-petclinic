@@ -83,9 +83,11 @@ pipeline {
 			script {
 				sh 'git bisect start'
 				echo "$previousSucess"
-				sh 'git bisect good $previousSucess'
 				def unstable = env.GIT_COMMIT
-				sh 'git bisect bad $unstable'
+				sh '''
+                    git bisect good $previousSucess
+                    git bisect bad $unstable"
+                '''
 				sh 'git bisect run mvn clean test'
 				sh 'git bisect reset'
 			}
