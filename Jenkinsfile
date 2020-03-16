@@ -1,4 +1,4 @@
-def currentCommit = $GIT_COMMIT
+def currentCommit = env.GIT_COMMIT
 def previousSucess = readFile 'PreviousSucess.txt'
 def count = readFile 'Count.txt'
 pipeline {
