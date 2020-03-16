@@ -13,11 +13,12 @@ pipeline {
 				  echo "${count}"
 				  echo "${previousSucess}"
 				  echo "$env.GIT_COMMIT"
-					if( previousSucess ){
+					if( previousSucess == "" ){
 						echo 'No previous sucess build, going to build.'
 					}
 					else{
 						if( count >=8 ){
+							echo "${count}"
 							echo 'Having 8 commits, going to build.'
 							sh 'echo "0" > Count.txt'
 						}
