@@ -19,14 +19,14 @@ pipeline {
 						if( count >=8 ){
 							echo "${count}"
 							echo 'Having 8 commits, going to build.'
-							sh 'echo "0" > Count.txt'
+							writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt", text: "0")
 						}
 						else{
 							newCount = count + 1
 							echo "${newCount}"
 							writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt", text: newCount.toString())
 							echo 'increment count and exiting.'
-							exit 0
+							return
 						}
 					}
 			}
@@ -45,6 +45,16 @@ pipeline {
 		echo 'Testing..'
         // sh 'mvn test' 
 		writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt", text:  env.GIT_COMMIT)
+		failure {
+			echo 'Testing failed!'
+			script{
+				if ( previousSucess != NULL) {				
+				sh "git bisect start $GIT_COMMIT ${previousSucess}"
+				sh "git bisect run mvn clean test"
+				sh "git bisect reset"
+				}
+			}			
+    	}
       }
     }
 
@@ -65,16 +75,4 @@ pipeline {
     }
 
   }
-  post {
-    	failure {
-			echo 'Testing failed!'
-			script{
-				if ( previousSucess != NULL) {				
-				sh "git bisect start $GIT_COMMIT ${previousSucess}"
-				sh "git bisect run mvn clean test"
-				sh "git bisect reset"
-				}
-			}	
-    	}
-   }
 }
