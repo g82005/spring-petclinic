@@ -1,13 +1,12 @@
-
+def currentCommit = env.GIT_COMMIT
+def count = readFile 'Count.txt'
 pipeline {
   agent any
-
   stages {
-		def currentCommit = env.GIT_COMMIT
-		def count = readFile 'Count.txt'
 		stage('Phase 1') {
 			steps {
 				script{
+					count = readFile 'Count.txt'
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
 					if(${previousSucess}.trim()){
