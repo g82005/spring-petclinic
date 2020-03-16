@@ -87,7 +87,9 @@ pipeline {
 			echo 'Testing failed!'
 			script{
 				if ( previousSucess != "") {
-					sh "git bisect start $GIT_COMMIT ${previousSucess}"
+					sh "git bisect start"
+					sh "git bisect good ${previousSucess}"
+					sh "git bisect good $GIT_COMMIT"
 					sh "git bisect run mvn clean test"
 					sh "git bisect reset"
 				}
