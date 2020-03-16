@@ -1,5 +1,4 @@
-def lastSuccessfulCommit = %GIT_PREVIOUS_SUCCESSFUL_COMMIT%
-def currentCommit = %GIT_COMMIT%
+def currentCommit = $GIT_COMMIT
 def previousSucess = readFile 'PreviousSucess.txt'
 def count = readFile 'Count.txt'
 pipeline {
