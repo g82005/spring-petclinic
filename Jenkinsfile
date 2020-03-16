@@ -32,17 +32,17 @@ pipeline {
 			}
 		  }
 	}
-    stage('Build') {
-      steps {
-		  script {
-				if (!skipping){
-					echo 'Building'
-				// sh 'mvn spring-javaformat:apply'
-				// sh 'mvn clean'
+		stage('Build') {
+			steps {
+				script {
+					if (!skipping){
+						echo 'Building'
+					// sh 'mvn spring-javaformat:apply'
+					// sh 'mvn clean'
+					}
 				}
-		 }
-	  }
-    }
+			}
+		}
 
 		stage('Test') {
 			steps {
