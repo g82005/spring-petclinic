@@ -83,8 +83,6 @@ pipeline {
 		success {
             echo 'Testing succeeeded!'
         }
-    	failure {
-			echo 'Testing failed!'
-		}
+    	
 	}
 }
