@@ -1,5 +1,5 @@
 def currentCommit = env.GIT_COMMIT
-def count = readFile 'Count.txt'
+def count
 pipeline {
   agent any
   stages {
@@ -9,6 +9,7 @@ pipeline {
 					node{
 						count = readFile 'Count.txt'
 					}
+					
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
 					if(${previousSucess}.trim()){
