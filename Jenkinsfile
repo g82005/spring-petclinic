@@ -43,7 +43,7 @@ pipeline {
       steps {
 		echo 'Testing..'
         // sh 'mvn test'
-		sh 'echo $env.GIT_COMMIT > PreviousSucess.txt'
+		sh 'echo "$env.GIT_COMMIT" > "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt"'
       }
     }
 
