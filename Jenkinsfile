@@ -1,4 +1,4 @@
-def previousSucess = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
+def previousSucess = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT.trim()
 def currentCommit = env.GIT_COMMIT
 def count
 
@@ -8,11 +8,11 @@ pipeline {
 	stage('Phase 1') {
 		steps {
 			script {
-				  count = readFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt")
-				  echo "${count.trim()}"
+				  count = readFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt").trim()
+				  echo "${count}"
 				  echo "$env.GIT_PREVIOUS_SUCCESSFUL_COMMIT"
 				  echo "$env.GIT_COMMIT"
-					if( ${previousSucess}.trim() ){
+					if( previousSucess ){
 						echo 'No previous sucess build, going to build.'
 					}
 					else{
