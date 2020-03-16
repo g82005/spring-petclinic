@@ -63,7 +63,7 @@ pipeline {
 					if (!skipping){
 						echo 'Packaging'
 						sh 'mvn package'
-					}a
+					}
 				}  
 			}
 		}
