@@ -70,14 +70,9 @@ pipeline {
 
 		stage('Deploy') {
 			steps {
-				when {
-						branch 'master'
-					}
-				steps {
-					script{
-						if (!skipping){
-							echo 'Deploying'
-						}
+				script{
+					if (!skipping){
+						echo 'Deploying'
 					}
 				}
 			}
