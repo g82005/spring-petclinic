@@ -43,7 +43,8 @@ pipeline {
       steps {
 		echo 'Testing..'
         // sh 'mvn test'
-		echo "$env.GIT_COMMIT" > "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt"
+		deleteFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt")
+		writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt", text:  env.GIT_COMMIT)
       }
     }
 
