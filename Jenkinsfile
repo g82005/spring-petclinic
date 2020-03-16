@@ -57,7 +57,7 @@ pipeline {
 	post {
     	failure {
 			echo 'Testing failed!'
-			if(${previousSucess.}trim()!=NULL){				
+			if(${previousSucess}.trim()!=NULL){				
 				sh "git bisect start $env.GIT_COMMIT ${previousSucess}.trim()"
 				sh "git bisect run mvn clean test"
 				sh "git bisect reset"
