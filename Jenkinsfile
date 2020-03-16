@@ -61,7 +61,7 @@ pipeline {
 			steps {
 				script {
 					if (!skipping){
-						echo 'Packaging '
+						echo 'Packaging'
 						sh 'mvn package'
 					}
 				}  
@@ -72,7 +72,7 @@ pipeline {
 			steps {
 				script{
 					if (!skipping){
-						echo 'Deploying '
+						echo 'Deploying'
 					}
 				}
 			}
@@ -87,7 +87,7 @@ pipeline {
 			echo 'Testing failed!'
 			script{
 				if ( previousSucess != "") {
-					sh "git bisect start"
+					sh "git bisect start $GIT_COMMIT ${previousSucess}"
 					sh "git bisect run mvn clean test"
 					sh "git bisect reset"
 				}
