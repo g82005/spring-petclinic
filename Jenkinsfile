@@ -86,7 +86,7 @@ pipeline {
 				def unstable = env.GIT_COMMIT
 				sh '''
                     git bisect good $previousSucess
-                    git bisect bad $unstable"
+                    git bisect bad $unstable
                 '''
 				sh 'git bisect run mvn clean test'
 				sh 'git bisect reset'
