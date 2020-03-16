@@ -7,7 +7,7 @@ pipeline {
 			steps {
 				script{
 					node{
-						count = readFile 'D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt'
+						count = readFile 'Count.txt'
 					}
 					
 					echo "${count.trim()}"
