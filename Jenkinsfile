@@ -23,8 +23,9 @@ pipeline {
 						}
 						else{
 							newCount = count + 1
-							sh 'echo ${newCount} > Count.txt'
-							echo 'increment count to ${count} Exiting.'
+							echo "${newCount}"
+							writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt", text: newCount)
+							echo 'increment count to "${count}" Exiting.'
 							exit 0
 						}
 					}
