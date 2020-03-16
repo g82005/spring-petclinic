@@ -79,17 +79,18 @@ pipeline {
     }
 
     stage('Deploy') {
-	script{
-		if (!skipping){
-				when {
-					branch 'master'
-				  }
-				  steps {
-					echo 'Deploying'
+	steps {
+		script{
+			if (!skipping){
+					when {
+						branch 'master'
+					  }
+					  steps {
+						echo 'Deploying'
+					}
 				}
 			}
 		}
-    }
-
+	}
   }
 }
