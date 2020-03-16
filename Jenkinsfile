@@ -85,11 +85,6 @@ pipeline {
         }
     	failure {
 			echo 'Testing failed!'
-			script{
-				if ( previousSucess != "") {
-					echo "x"
-				}
-			}
 		}
 	}
 }
