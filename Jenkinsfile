@@ -1,3 +1,4 @@
+#!/bin/bash
 def currentCommit = env.GIT_COMMIT
 def count
 pipeline {
@@ -7,7 +8,7 @@ pipeline {
 			steps {
 				script{
 					node{
-						count = readFile 'Count.txt'
+						count = readFile '${WORKSPACE}/Count.txt'
 					}
 					
 					echo "${count.trim()}"
