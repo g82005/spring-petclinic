@@ -1,6 +1,6 @@
 def previousSucess
 def count
-def  cc = env.GIT_COMMIT
+
 pipeline {
   agent any
   stages {
@@ -12,8 +12,6 @@ pipeline {
 				  echo "${count}"
 				  echo "${previousSucess}"
 				  echo "$env.GIT_COMMIT"
-				 
-				  echo "${cc}"
 					if( previousSucess == "" ){
 						echo 'No previous sucess build, going to build.'
 					}
@@ -24,9 +22,9 @@ pipeline {
 							sh 'echo "0" > Count.txt'
 						}
 						else{
-							newCount = ${count} + 1
+							newCount = count + 1
 							sh 'echo ${newCount} > Count.txt'
-							echo 'increment count to ${count.trim().toInteger(). Exiting.}'
+							echo 'increment count to ${count} Exiting.'
 							exit 0
 						}
 					}
@@ -45,7 +43,7 @@ pipeline {
       steps {
 		echo 'Testing..'
         // sh 'mvn test'
-		sh 'echo "$env.GIT_COMMIT" > "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt"'
+		echo "$env.GIT_COMMIT" > "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt"
       }
     }
 
