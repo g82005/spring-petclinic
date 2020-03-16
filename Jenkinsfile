@@ -34,55 +34,61 @@ pipeline {
 	}
     stage('Build') {
       steps {
-		if (skipping){
-			echo 'Building'
-        // sh 'mvn spring-javaformat:apply'
-        // sh 'mvn clean'
-		}
-      }
+		  script {
+				if (!skipping){
+					echo 'Building'
+				// sh 'mvn spring-javaformat:apply'
+				// sh 'mvn clean'
+				}
+		 }
+	  }
     }
 
     stage('Test') {
       steps {
-		  if (skipping){
-			echo 'Testing..'
-			// sh 'mvn test' 
-			writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt", text:  env.GIT_COMMIT)
-			if (currentBuild.result != 'SUCCESS') {
-				echo 'Testing failed!'
-				script{
-					if ( previousSucess != NULL) {				
-					sh "git bisect start $GIT_COMMIT ${previousSucess}"
-					sh "git bisect run mvn clean test"
-					sh "git bisect reset"
-					}
-				}			
-			
-		  }
+		  script {
+			  if (!skipping){
+				echo 'Testing..'
+				// sh 'mvn test' 
+				writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt", text:  env.GIT_COMMIT)
+				if (currentBuild.result != 'SUCCESS') {
+					echo 'Testing failed!'
+					script{
+						if ( previousSucess != NULL) {				
+						sh "git bisect start $GIT_COMMIT ${previousSucess}"
+						sh "git bisect run mvn clean test"
+						sh "git bisect reset"
+						}
+					}			
+				
+			  }
+			}
 		}
       }
     }
 
     stage('Package') {
       steps {
-		if (skipping){
-			 echo 'Packaging'
-			// sh 'mvn package'
-		}
-	   
+		  script {
+				if (!skipping){
+					 echo 'Packaging'
+					// sh 'mvn package'
+				}
+			 }  
       }
     }
 
     stage('Deploy') {
-		if (skipping){
-			when {
-				branch 'master'
-			  }
-			  steps {
-				echo 'Deploying'
+	script{
+		if (!skipping){
+				when {
+					branch 'master'
+				  }
+				  steps {
+					echo 'Deploying'
+				}
 			}
 		}
-      
     }
 
   }
