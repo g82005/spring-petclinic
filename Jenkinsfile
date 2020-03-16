@@ -1,82 +1,38 @@
-def previousSucess
-def count
-def skipping = false
-def testPass = false
 pipeline {
-	agent any
-	stages {
-		stage('Phase 1') {
-			steps {
-				script {
-					count = readFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt").trim().toInteger()
-					previousSucess = readFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt").trim()
-					echo "${count}"
-					echo "${previousSucess}"
-					echo "$env.GIT_COMMIT"
-					if( previousSucess == "" ){
-						echo 'No previous sucess build, going to build.'
-					}
-					else{
-						if( count >=8 ){
-							echo "${count}"
-							echo 'Having 8 commits, going to build.'
-							writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt", text: "0")
-						}
-						else{
-							newCount = count + 1
-							echo "${newCount}"
-							writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt", text: newCount.toString())
-							echo 'increment count and exiting.'
-							skipping = true
-						}
-					}
-				}
-			}
-		}
-		stage('Build') {
-			steps {
-				script {
-					if (!skipping){
-						echo 'Building'
-						sh 'mvn spring-javaformat:apply'
-						sh 'mvn clean'
-					}
-				}
-			}
-		}
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        echo 'mvn spring-javaformat:apply'
+        echo 'mvn clean'
+      }
+    }
 
-		stage('Test') {
-			steps {
-				script {
-					if (!skipping){
-						echo 'Testing..'
-						sh 'mvn test' 
-						writeFile(file: "D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt", text:  env.GIT_COMMIT)
-					}
-				}
-			}
-		}
+    stage('Test') {
+      steps {
+        echo 'mvn test'
+      }
+    }
 
-		stage('Package') {
-			steps {
-				script {
-					if (!skipping){
-						echo 'Packaging'
-						sh 'mvn package'
-					}
-				}  
-			}
-		}
+    stage('Package') {
+      steps {
+        echo 'mvn package'
+      }
+    }
 
-		stage('Deploy') {
-			steps {
-				script{
-					if (!skipping){
-						echo 'Deploying'
-					}
-				}
-			}
-		}
+    stage('Deploy') {
+      when {
+        branch 'master'
+      }
+      steps {
+        echo 'Deploying'
+      }
+    }
+
+  }
+  post {
+    always{
+		echo "post"
 	}
-
+  }
 }
