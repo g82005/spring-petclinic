@@ -11,7 +11,7 @@ pipeline {
 				  count = readFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/Count.txt").trim().toInteger()
 				  previousSucess = readFile("D:/CONCORDIA/2020/20 01 WINTER/SOEN 345/Assignments/06/q3/spring-petclinic/PreviousSucess.txt").trim()
 				  echo "${count}"
-				  echo "$(previousSucess)"
+				  echo "${previousSucess}"
 				  echo "$env.GIT_COMMIT"
 					if( previousSucess ){
 						echo 'No previous sucess build, going to build.'
