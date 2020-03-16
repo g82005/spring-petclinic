@@ -6,7 +6,9 @@ pipeline {
 		stage('Phase 1') {
 			steps {
 				script{
-					count = readFile 'Count.txt'
+					node{
+						count = readFile 'Count.txt'
+					}
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
 					if(${previousSucess}.trim()){
