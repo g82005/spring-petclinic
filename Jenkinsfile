@@ -88,10 +88,8 @@ pipeline {
 			script{
 				if ( previousSucess != "") {
 					sh 'git bisect start'
-					sh 'git bisect bad "$env.GIT_COMMIT"' 
-					sh 'git bisect good "${previousSucess}"'
-					sh 'git bisect run mvn clean test'
-					sh 'git bisect reset'
+					echo "$env.GIT_COMMIT"
+					echo "${previousSucess}"
 				}
 			}
 		}
