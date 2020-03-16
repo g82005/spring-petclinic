@@ -9,7 +9,7 @@ pipeline {
 			steps {
 					echo "${count.trim()}"
 					echo "${previousSucess}.trim()"
-					if(${previousSucess.}trim()){
+					if(${previousSucess}.trim()){
 						echo 'No previous sucess build, going to build.'
 					}
 					else{
